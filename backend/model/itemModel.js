@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const ItemModel = new mongoose.Schema({
     itemId: { type: Number, unique: true }, 
-    itemName: { type: String, unique: true }, 
+    customerName: { type: String },
+    itemName: { type: String}, 
     price: { type: Number },
     tax: { type: Number },
     subTotal: { type: Number },

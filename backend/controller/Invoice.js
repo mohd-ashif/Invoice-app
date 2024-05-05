@@ -9,32 +9,32 @@ exports.getInvoice = async (req, res) => {
         return res.status(500).json({ message: "Server Error" });
     }
 };
-
 exports.createInvoice = async (req, res) => {
-    try {
-      const parsedPrice = parseFloat(price);
-      const parsedTax = parseFloat(tax);
-      
-      const subTotal = parsedPrice + parsedTax; 
-  
-      const newItem = new items({
-        itemId,
-        itemName,
-        price,
-        tax,
-        subTotal,
-        date
-      });
-      await newItem.save();
-      res.status(201).json({
-        success: true,
-        message: 'Item created successfully',
-        item: newItem,
-      });
-    } catch (error) {
-     
-      console.error('Error creating item:', error);
-      res.status(500).json({ success: false, message: 'Failed to create item' });
-    }
-  };
-  
+  try {
+    const { itemId, itemName,customerName,  price, tax, date } = req.body; 
+    
+    const parsedPrice = parseFloat(price);
+    const parsedTax = parseFloat(tax);
+    
+    const subTotal = parsedPrice + parsedTax; 
+
+    const newItem = new items({
+      itemId,
+      itemName,
+      customerName,
+      price: parsedPrice, 
+      tax: parsedTax, 
+      subTotal,
+      date
+    });
+    await newItem.save();
+    res.status(201).json({
+      success: true,
+      message: 'Item created successfully',
+      item: newItem,
+    });
+  } catch (error) {
+    console.error('Error creating item:', error);
+    res.status(500).json({ success: false, message: 'Failed to create item' });
+  }
+};

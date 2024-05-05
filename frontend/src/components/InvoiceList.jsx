@@ -24,7 +24,7 @@ function InvoiceList() {
   };
 
   const filteredInvoices = searchQuery 
-    ? invoices.filter(invoice => invoice.itemName.toLowerCase().includes(searchQuery.toLowerCase()))
+    ? invoices.filter(invoice =>  invoice.customerName.toLowerCase().includes(searchQuery.toLowerCase()) || invoice.itemName.toLowerCase().includes(searchQuery.toLowerCase()))
     : invoices;
   
   return (
@@ -38,8 +38,9 @@ function InvoiceList() {
               <table className="w-full whitespace-nowrap rounded-lg overflow-hidden">
                 <thead>
                   <tr className="text-left bg-gray-200">
-                    <th className="px-4 py-3">Name</th>
-                    <th className="px-4 py-3">Invoice No.</th>
+                  <th className="px-4 py-3">Invoice No.</th>
+                    <th className="px-4 py-3">Customer Name</th>
+                    <th className="px-4 py-3">Item </th>
                     <th className="px-4 py-3">Date</th>
                     <th className="px-4 py-3">Total</th>
                     <th className="px-4 py-3">Tax</th>
@@ -49,11 +50,13 @@ function InvoiceList() {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {filteredInvoices.map(invoice => (
                     <tr key={invoice.id} className="hover:bg-gray-100">
+                       <td className="px-4 py-3">{invoice.itemId}</td>
+                       <td className="px-4 py-3">{invoice.customerName}</td>
                       <td className="px-4 py-3">{invoice.itemName}</td>
-                      <td className="px-4 py-3">{invoice.itemId}</td>
-                      <td className="px-4 py-3">{invoice.date}</td>
+                      <td className="px-4 py-3">{invoice.date?.slice(0, 10)}</td>
+
                       <td className="px-4 py-3">{invoice.price}</td>
-                      <td className="px-4 py-3">{invoice.tax}%</td>
+                      <td className="px-4 py-3">{invoice.tax}</td>
                       <td className="px-4 py-3">{invoice.subTotal}</td>
                     </tr>
                   ))}

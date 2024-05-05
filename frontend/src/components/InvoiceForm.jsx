@@ -7,6 +7,7 @@ function InvoiceForm({ handleCloseCreateForm, onCreate }) {
   const [formData, setFormData] = useState({
     itemId: '',
     itemName: '',
+    customerName: '', // Define customerName as part of the form data
     price: '',
     tax: '',
     date: new Date(), 
@@ -19,7 +20,6 @@ function InvoiceForm({ handleCloseCreateForm, onCreate }) {
     setFormData({ ...formData, [name]: value });
   };
 
-
   const handleDateChange = (date) => {
     setFormData({ ...formData, date });
   };
@@ -27,7 +27,7 @@ function InvoiceForm({ handleCloseCreateForm, onCreate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.itemId || !formData.itemName || !formData.price || !formData.tax) {
+    if (!formData.itemId || !formData.itemName || !formData.customerName || !formData.price || !formData.tax) {
       alert('Please fill all fields');
       return;
     }
@@ -75,6 +75,21 @@ function InvoiceForm({ handleCloseCreateForm, onCreate }) {
               className="w-full border-gray-300 border rounded-md px-3 py-2 text-black"
             />
           </div>
+
+          <div className="mb-4">
+            <label htmlFor="customerName" className="block font-semibold mb-1">
+              Customer Name 
+            </label>
+            <input
+              type="text"
+              id="customerName"
+              name="customerName"
+              value={formData.customerName}
+              onChange={handleChange}
+              className="w-full border-gray-300 border rounded-md px-3 py-2 text-black"
+            />
+          </div>
+
           <div className="mb-4">
             <label htmlFor="price" className="block font-semibold mb-1">
               Price
@@ -86,7 +101,7 @@ function InvoiceForm({ handleCloseCreateForm, onCreate }) {
               value={formData.price}
               onChange={handleChange}
               className="w-full border-gray-300 border rounded-md px-3 py-2 text-black"
-            />
+            /> 
           </div>
           <div className="mb-4">
             <label htmlFor="tax" className="block font-semibold mb-1">
@@ -132,4 +147,3 @@ function InvoiceForm({ handleCloseCreateForm, onCreate }) {
 }
 
 export default InvoiceForm;
-

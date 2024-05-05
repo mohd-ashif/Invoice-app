@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const{ db} = require('./db/db')
+const{ db} = require('./db/db.js')
 const ItemModel = require('./model/itemModel.js')
 const invoice = require('./routes/Invoice.js')
 const app = express();
